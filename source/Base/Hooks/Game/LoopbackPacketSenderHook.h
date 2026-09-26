@@ -76,48 +76,10 @@ void kickPlayer(std::string author, std::string type) {
 HOOK_DEFINE_TRAMPOLINE(CommandP) {
 static void Callback(const float* a1, const float* networkIdentifier, const float* netEventCallback, const std::shared_ptr<Packet>& packet) {
         auto command = getCommandMessage(packet.get());
-        if (command.find("/me") != std::string::npos || command.find("/mE") != std::string::npos || command.find("/Me") != std::string::npos || command.find("/ME") != std::string::npos)
+        if (command.find("/me ") != std::string::npos || command.find("/mE ") != std::string::npos || command.find("/Me ") != std::string::npos || command.find("/ME ") != std::string::npos)
         {
             return;
         }
-        if (command.find("/.playerlist") != std::string::npos)
-            {
-                auto* level = Address::getLocalPlayer()->getLevel();
-                auto players = level->getPlayerList();
-                //AudioUtils::PlayFromMC("random.orb", 0.5f, 1.f);
-                for (auto& [uuid, player] : *players)
-                {
-                    std::string platform;
-                    switch ((uint8_t)player.buildPlatform)
-                    {
-                    case 1:
-                        platform = "Android";
-                        break;
-                    case 2:
-                        platform = "iOS";
-                        break;
-                    case 7:
-                    case 8:
-                        platform = "Windows";
-                        break;
-                    case 11:
-                        platform = "PlayStation";
-                        break;
-                    case 12:
-                        platform = "Switch 1/2";
-                        break;
-                    case 13:
-                        platform = "Xbox";
-                        break;
-                    case 14:
-                        platform = "ChromeOS";
-                        break;
-                    }
-                    ChatUtils::SendMessage("\n\nName: " + charToName(player.name));
-                    ChatUtils::SendMessage("\nPlatform: " + platform + "\n");
-                }
-                return;
-            }
         Orig(a1, networkIdentifier, netEventCallback, packet);
     }
 };
