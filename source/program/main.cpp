@@ -107,7 +107,7 @@ bool aaa = false;
 extern "C" void exl_main(void* x0, void* x1) {
     exl::hook::Initialize();
 
-    uintptr_t address1 = Memory::findSig("FF 43 06 D1 FD 7B 13 A9 FC 6F 14 A9 FA 67 15 A9 F8 5F 16 A9 F6 57 17 A9 F4 4F 18 A9 FD C3 04 91 E2 07");
+    /*uintptr_t address1 = Memory::findSig("FF 43 06 D1 FD 7B 13 A9 FC 6F 14 A9 FA 67 15 A9 F8 5F 16 A9 F6 57 17 A9 F4 4F 18 A9 FD C3 04 91 E2 07");
         if(address1)
             ForceCloseOreUI::InstallAtPtr(address1);          
         
@@ -117,10 +117,10 @@ extern "C" void exl_main(void* x0, void* x1) {
 
     uintptr_t address3 = Memory::findSig("FF ? 03 D1 FD 7B ? A9 FB 43 00 F9 FA 67 ? A9 F8 5F ? A9 F6 57 ? A9 F4 4f ? A9 FD ? ? 91 68 E1");
 		if(address3)
-			Command::InstallAtPtr(address3);
+			Command::InstallAtPtr(address3);*/
     
     ActorHooks::Instance().Initialize();
-    VulkanHook::Instance().Initialize();
+    //VulkanHook::Instance().Initialize();
 };
 
 extern "C" NORETURN void exl_exception_entry() {

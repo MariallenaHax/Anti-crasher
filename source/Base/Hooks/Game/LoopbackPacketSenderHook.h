@@ -36,9 +36,13 @@ void sendCommand(const std::string command) {
     /*std::shared_ptr<Packet> packet = MinecraftPackets::createPacket(77);
     if (!packet) return;
     auto* payload = reinterpret_cast<std::byte*>(packet.get()) + 0x30;
-    std::memcpy(reinterpret_cast<char*>(payload),command.c_str(),command.size() + 1);
-    *reinterpret_cast<std::uint8_t*>(payload + 0x18) = 0;
-    *reinterpret_cast<bool*>(payload + 0x54) = true;
+    auto* dst = reinterpret_cast<uint8_t*>(payload);
+    *reinterpret_cast<std::uint8_t*>(payload - 0x30) = (uint32_t)(command.size() + 0x30);
+    dst[0] = (int32_t)command.size();
+    for (size_t i = 0; i < command.size(); i++)
+        dst[i + 2] = (uint8_t)command[i];
+    *reinterpret_cast<std::uint8_t*>(payload + 0x18 + command.size() + 2) = 0;
+    *reinterpret_cast<bool*>(payload + 0x54 + command.size() + 2) = true;
     Address::getLoopback()->sendToServer(packet.get());*/
 };
 
@@ -71,7 +75,12 @@ void kickPlayer(std::string author, std::string type) {
 
 HOOK_DEFINE_TRAMPOLINE(CommandP) {
 static void Callback(const float* a1, const float* networkIdentifier, const float* netEventCallback, const std::shared_ptr<Packet>& packet) {
-        if (getCommandMessage(packet.get()).find("/.playerlist") != std::string::npos)
+        auto command = getCommandMessage(packet.get());
+        if (command.find("/me") != std::string::npos || command.find("/mE") != std::string::npos || command.find("/Me") != std::string::npos || command.find("/ME") != std::string::npos)
+        {
+            return;
+        }
+        if (command.find("/.playerlist") != std::string::npos)
             {
                 auto* level = Address::getLocalPlayer()->getLevel();
                 auto players = level->getPlayerList();
