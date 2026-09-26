@@ -12,37 +12,44 @@ bool isluminespamming = false;
 bool isnaturespamming = false;
 bool istoolongsize = false;
 
+static std::string readString(uintptr_t addr)
+{
+    auto possiblePtr = *reinterpret_cast<uintptr_t*>(addr);
+
+    if (possiblePtr >= 0x1F000000)
+        return std::string(reinterpret_cast<const char*>(addr));
+
+    return std::string(*reinterpret_cast<const char**>(addr + 0x10));
+}
+
 static std::string getCommandMessage(void* packet) {
     uintptr_t payload = reinterpret_cast<uintptr_t>(packet) + 0x30;
-    return std::string(reinterpret_cast<const char*>(payload));
+    return readString(payload);
 }
 static std::string getTextPacketMessage(void* packet) {
     uintptr_t payload = reinterpret_cast<uintptr_t>(packet) + 0x30;
     uint32_t variantIndex = *reinterpret_cast<uint32_t*>(payload + 0x90);
-    if (variantIndex == 1)
-        return std::string(reinterpret_cast<const char*>(payload + 0x78));
-    if (variantIndex == 0 || variantIndex == 2) 
-        return std::string(reinterpret_cast<const char*>(payload + 0x60));
+        if (variantIndex == 1)
+            return readString(payload + 0x78);
+        if (variantIndex == 0 || variantIndex == 2) 
+            return readString(payload + 0x60);
     return {};
 }
 static std::string getAuthor(void* packet) {
     uintptr_t payload = reinterpret_cast<uintptr_t>(packet) + 0x30;
     uint32_t variantIndex = *reinterpret_cast<uint32_t*>(payload + 0x90);
-    if (variantIndex == 1)
-        return std::string(reinterpret_cast<const char*>(payload + 0x60));
+
+        if (variantIndex == 1)
+            return readString(payload + 0x60);
     return {};
 }
 void sendCommand(const std::string command) {
     /*std::shared_ptr<Packet> packet = MinecraftPackets::createPacket(77);
     if (!packet) return;
     auto* payload = reinterpret_cast<std::byte*>(packet.get()) + 0x30;
-    auto* dst = reinterpret_cast<uint8_t*>(payload);
-    *reinterpret_cast<std::uint8_t*>(payload - 0x30) = (uint32_t)(command.size() + 0x30);
-    dst[0] = (int32_t)command.size();
-    for (size_t i = 0; i < command.size(); i++)
-        dst[i + 2] = (uint8_t)command[i];
-    *reinterpret_cast<std::uint8_t*>(payload + 0x18 + command.size() + 2) = 0;
-    *reinterpret_cast<bool*>(payload + 0x54 + command.size() + 2) = true;
+    *reinterpret_cast<std::string*>(payload + 0x0) = command;
+    *reinterpret_cast<std::uint8_t*>(payload + 0x48 + 0x0) = 0;
+    *reinterpret_cast<bool*>(payload + 0x54) = true;
     Address::getLoopback()->sendToServer(packet.get());*/
 };
 
@@ -53,7 +60,7 @@ void kickPlayer(std::string author, std::string type) {
     if (!isSent) {
         //AudioUtils::PlayFromMC("random.orb", 0.25f, 1.f);
         //AudioUtils::PlayFromMC("firework.blast", 0.25f, 1.f);
-        sendCommand("/tellraw @a { \"rawtext\": [{ \"text\": \"Kicked player " + author + " (type : " + type + ")\"}]");
+        sendCommand("/tellraw @a { \"rawtext\": [{ \"text\": \"Kicked player " + author + " (" + type + ")\"}]");
         isSent = true;
     }
     else {
@@ -76,7 +83,7 @@ void kickPlayer(std::string author, std::string type) {
 HOOK_DEFINE_TRAMPOLINE(CommandP) {
 static void Callback(const float* a1, const float* networkIdentifier, const float* netEventCallback, const std::shared_ptr<Packet>& packet) {
         auto command = getCommandMessage(packet.get());
-        if (command.find("/me ") != std::string::npos || command.find("/mE ") != std::string::npos || command.find("/Me ") != std::string::npos || command.find("/ME ") != std::string::npos)
+        if (command.find("/me ") != std::string::npos || command.find("/mE ") != std::string::npos || command.find("/Me ") != std::string::npos || command.find("/ME ") != std::string::npos || command.find("me ") != std::string::npos || command.find("mE ") != std::string::npos || command.find("Me ") != std::string::npos || command.find("ME ") != std::string::npos)
         {
             return;
         }
@@ -104,7 +111,7 @@ static void Callback(const float* a1, const float* networkIdentifier, const floa
                     isboriontryingtocrash = false;
                 }
                 else {
-                    sendCommand("/tellraw @a { \"rawtext\": [{ \"text\": \"Detected crasher. " + author + " (type : borion)\"}]");
+                    sendCommand("/tellraw @a { \"rawtext\": [{ \"text\": \"Detected crasher. " + author + " (borion)\"}]");
                     //AudioUtils::PlayFromMC("random.orb", 1.f, 2.f);
                     isboriontryingtocrash = true;
                 }
@@ -118,7 +125,7 @@ static void Callback(const float* a1, const float* networkIdentifier, const floa
                     isluminespamming = false;
                 }
                 else {
-                    sendCommand("/tellraw @a { \"rawtext\": [{ \"text\": \"Detected crasher. " + author + " (type : external)\"}]");
+                    sendCommand("/tellraw @a { \"rawtext\": [{ \"text\": \"Detected crasher. " + author + " (external)\"}]");
                     //AudioUtils::PlayFromMC("random.orb", 1.f, 2.f);
                     isluminespamming = true;
                 }
@@ -132,7 +139,7 @@ static void Callback(const float* a1, const float* networkIdentifier, const floa
                     isnaturespamming = false;
                 }
                 else {
-                    sendCommand("/tellraw @a { \"rawtext\": [{ \"text\": \"Detected spammer. " + author + " (type : nature)\"}]");
+                    sendCommand("/tellraw @a { \"rawtext\": [{ \"text\": \"Detected spammer. " + author + " (nature)\"}]");
                     //AudioUtils::PlayFromMC("random.orb", 1.f, 2.f);
                     isnaturespamming = true;
                 }
@@ -143,7 +150,7 @@ static void Callback(const float* a1, const float* networkIdentifier, const floa
                     istoolongsize = true;
                 }
                 else {
-                    sendCommand("/tellraw @a { \"rawtext\": [{ \"text\": \"Detected spammer. " + author + " (type : size)\"}]");
+                    sendCommand("/tellraw @a { \"rawtext\": [{ \"text\": \"Detected spammer. " + author + " (size)\"}]");
                     istoolongsize = false;
                 }
                 return;
