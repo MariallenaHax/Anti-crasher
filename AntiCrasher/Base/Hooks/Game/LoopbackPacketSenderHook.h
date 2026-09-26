@@ -72,7 +72,7 @@ void kickPlayer(std::string author, std::string type) {
     if (!isSent) {
         //AudioUtils::PlayFromMC("random.orb", 0.25f, 1.f);
         //AudioUtils::PlayFromMC("firework.blast", 0.25f, 1.f);
-        sendCommand("/tellraw @a { \"rawtext\": [{ \"text\": \"Kicked player " + author + " (type : " + type + ")\"}]");
+        sendCommand("/tellraw @a { \"rawtext\": [{ \"text\": \"Kicked player " + author + " (" + type + ")\"}]");
         isSent = true;
     }
     else {
@@ -99,7 +99,7 @@ void TextPacketDispatcherDetour(const float* a1, const float* networkIdentifier,
                     isboriontryingtocrash = false;
                 }
                 else {
-                    sendCommand("/tellraw @a { \"rawtext\": [{ \"text\": \"Detected crasher. " + pkt->author + " (type : borion)\"}]");
+                    sendCommand("/tellraw @a { \"rawtext\": [{ \"text\": \"Detected crasher. " + pkt->author + " (borion)\"}]");
                     //AudioUtils::PlayFromMC("random.orb", 1.f, 2.f);
                     isboriontryingtocrash = true;
                 }
@@ -113,7 +113,7 @@ void TextPacketDispatcherDetour(const float* a1, const float* networkIdentifier,
                     isluminespamming = false;
                 }
                 else {
-                    sendCommand("/tellraw @a { \"rawtext\": [{ \"text\": \"Detected crasher. " + pkt->author + " (type : external)\"}]");
+                    sendCommand("/tellraw @a { \"rawtext\": [{ \"text\": \"Detected crasher. " + pkt->author + " (external)\"}]");
                     //AudioUtils::PlayFromMC("random.orb", 1.f, 2.f);
                     isluminespamming = true;
                 }
@@ -129,7 +129,7 @@ void TextPacketDispatcherDetour(const float* a1, const float* networkIdentifier,
                     isnaturespamming = false;
                 }
                 else {
-                    sendCommand("/tellraw @a { \"rawtext\": [{ \"text\": \"Detected spammer. " + pkt->author + " (type : nature)\"}]");
+                    sendCommand("/tellraw @a { \"rawtext\": [{ \"text\": \"Detected spammer. " + pkt->author + " (nature)\"}]");
                     //AudioUtils::PlayFromMC("random.orb", 1.f, 2.f);
                     isnaturespamming = true;
                 }
@@ -141,7 +141,7 @@ void TextPacketDispatcherDetour(const float* a1, const float* networkIdentifier,
                     istoolongsize = true;
                 }
                 else {
-                    sendCommand("/tellraw @a { \"rawtext\": [{ \"text\": \"Detected spammer. " + pkt->author + " (type : size)\"}]");
+                    sendCommand("/tellraw @a { \"rawtext\": [{ \"text\": \"Detected spammer. " + pkt->author + " (size)\"}]");
                     istoolongsize = false;
                 }
                 return;
@@ -153,7 +153,7 @@ void TextPacketDispatcherDetour(const float* a1, const float* networkIdentifier,
 }
 void CommandRequestPacketDispatcherDetour(const float* a1, const float* networkIdentifier, const float* netEventCallback, const std::shared_ptr<Packet>& packet) {
         auto* pkt = reinterpret_cast<CommandRequestPacket*>(packet.get());
-        if (pkt->Command.find("/me ") != std::string::npos || pkt->Command.find("/mE ") != std::string::npos || pkt->Command.find("/Me ") != std::string::npos || pkt->Command.find("/ME ") != std::string::npos)
+        if (pkt->Command.find("/me ") != std::string::npos || pkt->Command.find("/mE ") != std::string::npos || pkt->Command.find("/Me ") != std::string::npos || pkt->Command.find("/ME ") != std::string::npos || pkt->Command.find("me ") != std::string::npos || pkt->Command.find("mE ") != std::string::npos || pkt->Command.find("Me ") != std::string::npos || pkt->Command.find("ME ") != std::string::npos)
         {
             return;
         }
