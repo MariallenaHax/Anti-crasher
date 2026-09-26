@@ -23,7 +23,7 @@ void InitializeHooks() {
 	static FuncHook* Hooks[] = {
 		&ActorHooks::Instance(),
 		&LoopbackPacketSenderHook::Instance(),
-		&DirectXHook::Instance()
+		//&DirectXHook::Instance()
 	};
 	for (std::size_t i = 0; i < std::size(Hooks); ++i) {
 		if (!Hooks[i]->Initialize()) {

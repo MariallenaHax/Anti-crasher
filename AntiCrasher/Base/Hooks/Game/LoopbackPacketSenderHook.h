@@ -153,47 +153,10 @@ void TextPacketDispatcherDetour(const float* a1, const float* networkIdentifier,
 }
 void CommandRequestPacketDispatcherDetour(const float* a1, const float* networkIdentifier, const float* netEventCallback, const std::shared_ptr<Packet>& packet) {
         auto* pkt = reinterpret_cast<CommandRequestPacket*>(packet.get());
-        if (pkt->Command.find("/me") != std::string::npos || pkt->Command.find("/mE") != std::string::npos || pkt->Command.find("/Me") != std::string::npos || pkt->Command.find("/ME") != std::string::npos)
+        if (pkt->Command.find("/me ") != std::string::npos || pkt->Command.find("/mE ") != std::string::npos || pkt->Command.find("/Me ") != std::string::npos || pkt->Command.find("/ME ") != std::string::npos)
         {
             return;
         }
-        if (pkt->Command.find("/.playerlist") != std::string::npos)
-        {
-            auto* level = Address::getLocalPlayer()->getLevel();
-            auto players = level->getPlayerList();
-            //AudioUtils::PlayFromMC("random.orb", 0.5f, 1.f);
-            for (auto& [uuid, player] : *players)
-            {
-                std::string platform;
-                switch ((uint8_t)player.buildPlatform)
-                {
-                case 1:
-                    platform = "Android";
-                    break;
-                case 2:
-                    platform = "iOS";
-                    break;
-                case 7:
-                case 8:
-                    platform = "Windows";
-                    break;
-                case 11:
-                    platform = "PlayStation";
-                    break;
-                case 12:
-                    platform = "Nintendo Switch";
-                    break;
-                case 13:
-                    platform = "Xbox";
-                    break;
-                case 14:
-                    platform = "ChromeOS";
-                    break;
-                }
-                ChatUtils::SendDefaultMessage("\n\nName: " + player.name + "\nPlatform: " + platform + "\n");
-            }
-            return;
-    }
     Memory::CallFunc<void*, const float*, const float*, const float*, const std::shared_ptr<Packet>&>(onCommandRequestPacketDispatcher, a1, networkIdentifier, netEventCallback, packet);
 }
 class LoopbackPacketSenderHook : public FuncHook {
