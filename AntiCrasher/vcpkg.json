@@ -1,0 +1,8 @@
+{
+  "name": "anticrasher",
+  "version": "1.0.0",
+  "builtin-baseline": "2e58bb35ff7a3a037920d959ce20cb4d8c22319a",
+  "dependencies": [
+    "curl"
+  ]
+}
