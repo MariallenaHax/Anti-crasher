@@ -1,0 +1,14 @@
+.vscode/*
+build/*
+out/*
+deploy/*
+source/nn/*
+source/lib/*
+source/nn.hpp
+source/helper/*
+source/rtld.hpp
+source/rtld/*
+
+*.elf
+*.nso
+*.npdm
