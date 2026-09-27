@@ -16,7 +16,7 @@ static std::string readString(uintptr_t addr)
 {
     auto possiblePtr = *reinterpret_cast<uintptr_t*>(addr);
 
-    if (possiblePtr >= 0x1F000000)
+    if (possiblePtr != 0x000000031)
         return std::string(reinterpret_cast<const char*>(addr));
 
     return std::string(*reinterpret_cast<const char**>(addr + 0x10));
@@ -47,8 +47,17 @@ void sendCommand(const std::string command) {
     /*std::shared_ptr<Packet> packet = MinecraftPackets::createPacket(77);
     if (!packet) return;
     auto* payload = reinterpret_cast<std::byte*>(packet.get()) + 0x30;
-    *reinterpret_cast<std::string*>(payload + 0x0) = command;
-    *reinterpret_cast<std::uint8_t*>(payload + 0x48 + 0x0) = 0;
+    if(command.size() >= 24)
+    {
+        *reinterpret_cast<uint8_t*>(payload + 0x0) = 0x31;
+        *reinterpret_cast<uint8_t*>(payload + 0x8) = command.size();
+        *reinterpret_cast<const char**>(payload + 0x10) = command.c_str();
+    }
+    else
+    {
+        std::memcpy(payload, command.c_str(), command.size() + 1);
+    }
+    *reinterpret_cast<uint8_t*>(payload + 0x48 + 0x0) = 0;
     *reinterpret_cast<bool*>(payload + 0x54) = true;
     Address::getLoopback()->sendToServer(packet.get());*/
 };

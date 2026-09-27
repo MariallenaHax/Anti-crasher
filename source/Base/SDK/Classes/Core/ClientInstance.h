@@ -73,7 +73,7 @@ public:
 	}
 public:
 	BUILD_ACCESS(GameRenderer*, GameRenderer2, 0x1418);
-	BUILD_ACCESS(class LoopbackPacketSender*, LoopbackPacketSender, 0x1A8); // 0xF8
+	BUILD_ACCESS(class LoopbackPacketSender*, LoopbackPacketSender, 0x1A0); // 0xF8
 	BUILD_ACCESS(class MinecraftGame*, MinecraftGame, 0x178); // 0xD0
 	BUILD_ACCESS(class TimerClass*, TimerClass, 0x180); // 0xD8
 	BUILD_ACCESS(class GuiData*, GuiData, 0x628)
