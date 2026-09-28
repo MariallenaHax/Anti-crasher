@@ -72,7 +72,7 @@ void kickPlayer(std::string author, std::string type) {
     if (!isSent) {
         //AudioUtils::PlayFromMC("random.orb", 0.25f, 1.f);
         //AudioUtils::PlayFromMC("firework.blast", 0.25f, 1.f);
-        sendCommand("/tellraw @a { \"rawtext\": [{ \"text\": \"Kicked player " + author + " (" + type + ")\"}]");
+        sendCommand("/tellraw @a { \"rawtext\": [{ \"text\": \"Kicked player " + author + " (" + type + ")\"}]}");
         isSent = true;
     }
     else {
@@ -99,7 +99,7 @@ void TextPacketDispatcherDetour(const float* a1, const float* networkIdentifier,
                     isboriontryingtocrash = false;
                 }
                 else {
-                    sendCommand("/tellraw @a { \"rawtext\": [{ \"text\": \"Detected crasher. " + pkt->author + " (borion)\"}]");
+                    sendCommand("/tellraw @a { \"rawtext\": [{ \"text\": \"Detected crasher. " + pkt->author + " (borion)\"}]}");
                     //AudioUtils::PlayFromMC("random.orb", 1.f, 2.f);
                     isboriontryingtocrash = true;
                 }
@@ -113,7 +113,7 @@ void TextPacketDispatcherDetour(const float* a1, const float* networkIdentifier,
                     isluminespamming = false;
                 }
                 else {
-                    sendCommand("/tellraw @a { \"rawtext\": [{ \"text\": \"Detected crasher. " + pkt->author + " (external)\"}]");
+                    sendCommand("/tellraw @a { \"rawtext\": [{ \"text\": \"Detected crasher. " + pkt->author + " (external)\"}]}");
                     //AudioUtils::PlayFromMC("random.orb", 1.f, 2.f);
                     isluminespamming = true;
                 }
@@ -129,7 +129,7 @@ void TextPacketDispatcherDetour(const float* a1, const float* networkIdentifier,
                     isnaturespamming = false;
                 }
                 else {
-                    sendCommand("/tellraw @a { \"rawtext\": [{ \"text\": \"Detected spammer. " + pkt->author + " (nature)\"}]");
+                    sendCommand("/tellraw @a { \"rawtext\": [{ \"text\": \"Detected spammer. " + pkt->author + " (nature)\"}]}");
                     //AudioUtils::PlayFromMC("random.orb", 1.f, 2.f);
                     isnaturespamming = true;
                 }
