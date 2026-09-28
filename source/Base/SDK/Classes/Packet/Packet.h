@@ -53,7 +53,7 @@ public:
 		static uintptr_t Address;
 
 		if (!Address) {
-			Address = Memory::findSig("1F 84 05 71 88 2E 00 54");
+			Address = Memory::findSig("? ? ? ? ? ? ? ? E9 03 00 2A ? ? ? ? ? ? ? ? ? ? ? ? 4C 79 69 78 6B 09 0C 8B 60 01 1F D6");
 		}
 
 		auto pFunction = reinterpret_cast<std::shared_ptr<Packet>(__attribute__((fastcall))*)(int)>(Address);
