@@ -153,7 +153,7 @@ void TextPacketDispatcherDetour(const float* a1, const float* networkIdentifier,
 }
 void CommandRequestPacketDispatcherDetour(const float* a1, const float* networkIdentifier, const float* netEventCallback, const std::shared_ptr<Packet>& packet) {
         auto* pkt = reinterpret_cast<CommandRequestPacket*>(packet.get());
-        if (pkt->Command.find("/me ") != std::string::npos || pkt->Command.find("/mE ") != std::string::npos || pkt->Command.find("/Me ") != std::string::npos || pkt->Command.find("/ME ") != std::string::npos || pkt->Command.find("me ") != std::string::npos || pkt->Command.find("mE ") != std::string::npos || pkt->Command.find("Me ") != std::string::npos || pkt->Command.find("ME ") != std::string::npos)
+        if (pkt->Command.find("/me ") == 0 || pkt->Command.find("/mE ") == 0 || pkt->Command.find("/Me ") == 0 || pkt->Command.find("/ME ") == 0 || pkt->Command.find("me ") == 0 || pkt->Command.find("mE ") == 0 || pkt->Command.find("Me ") == 0 || pkt->Command.find("ME ") == 0)
         {
             return;
         }
