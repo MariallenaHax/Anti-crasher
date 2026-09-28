@@ -141,7 +141,7 @@ void TextPacketDispatcherDetour(const float* a1, const float* networkIdentifier,
                     istoolongsize = true;
                 }
                 else {
-                    sendCommand("/tellraw @a { \"rawtext\": [{ \"text\": \"Detected spammer. " + pkt->author + " (size)\"}]");
+                    sendCommand("/tellraw @a { \"rawtext\": [{ \"text\": \"Detected spammer. " + pkt->author + " (size)\"}]}");
                     istoolongsize = false;
                 }
                 return;
