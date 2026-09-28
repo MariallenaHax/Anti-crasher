@@ -127,7 +127,7 @@ static void Callback(const float* a1, const float* networkIdentifier, const floa
                 return;
             }
 
-            else if (message.find("Ens76385:必須侵入QQ群:908840510") != std::string::npos || message.find("LUMINE UTILITY PROXY ON TOP!") != std::string::npos) {
+            else if (message.find("Ens76385:必須侵入QQ群:908840510") != std::string::npos || message.find("LUMINE PROXY TOP!") != std::string::npos) {
                 kickPlayer(author, "external");
 
                 if (isluminespamming) {
