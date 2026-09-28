@@ -115,7 +115,7 @@ extern "C" void exl_main(void* x0, void* x1) {
         if(address2)
             ItemEnch::InstallAtPtr(address2);  
 
-    uintptr_t address3 = Memory::findSig("FF ? 03 D1 FD 7B ? A9 FB 43 00 F9 FA 67 ? A9 F8 5F ? A9 F6 57 ? A9 F4 4f ? A9 FD ? ? 91 68 E1");
+    uintptr_t address3 = Memory::findSig("FF ? ? D1 ? ? ? A9 ? ? ? F9 ? ? ? A9 ? ? ? A9 ? ? ? A9 ? ? ? A9 ? ? ? 91 ? ? ? ? F3 03 03 AA ? ? ? F9 ? ? ? 6B");
 		if(address3)
 			Command::InstallAtPtr(address3);*/
     
