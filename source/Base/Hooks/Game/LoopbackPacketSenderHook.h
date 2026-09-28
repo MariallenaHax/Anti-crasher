@@ -69,7 +69,7 @@ void kickPlayer(std::string author, std::string type) {
     if (!isSent) {
         //AudioUtils::PlayFromMC("random.orb", 0.25f, 1.f);
         //AudioUtils::PlayFromMC("firework.blast", 0.25f, 1.f);
-        sendCommand("/tellraw @a { \"rawtext\": [{ \"text\": \"Kicked player " + author + " (" + type + ")\"}]");
+        sendCommand("/tellraw @a { \"rawtext\": [{ \"text\": \"Kicked player " + author + " (" + type + ")\"}]}");
         isSent = true;
     }
     else {
@@ -120,7 +120,7 @@ static void Callback(const float* a1, const float* networkIdentifier, const floa
                     isboriontryingtocrash = false;
                 }
                 else {
-                    sendCommand("/tellraw @a { \"rawtext\": [{ \"text\": \"Detected crasher. " + author + " (borion)\"}]");
+                    sendCommand("/tellraw @a { \"rawtext\": [{ \"text\": \"Detected crasher. " + author + " (borion)\"}]}");
                     //AudioUtils::PlayFromMC("random.orb", 1.f, 2.f);
                     isboriontryingtocrash = true;
                 }
@@ -134,7 +134,7 @@ static void Callback(const float* a1, const float* networkIdentifier, const floa
                     isluminespamming = false;
                 }
                 else {
-                    sendCommand("/tellraw @a { \"rawtext\": [{ \"text\": \"Detected crasher. " + author + " (external)\"}]");
+                    sendCommand("/tellraw @a { \"rawtext\": [{ \"text\": \"Detected crasher. " + author + " (external)\"}]}");
                     //AudioUtils::PlayFromMC("random.orb", 1.f, 2.f);
                     isluminespamming = true;
                 }
@@ -148,7 +148,7 @@ static void Callback(const float* a1, const float* networkIdentifier, const floa
                     isnaturespamming = false;
                 }
                 else {
-                    sendCommand("/tellraw @a { \"rawtext\": [{ \"text\": \"Detected spammer. " + author + " (nature)\"}]");
+                    sendCommand("/tellraw @a { \"rawtext\": [{ \"text\": \"Detected spammer. " + author + " (nature)\"}]}");
                     //AudioUtils::PlayFromMC("random.orb", 1.f, 2.f);
                     isnaturespamming = true;
                 }
@@ -159,7 +159,7 @@ static void Callback(const float* a1, const float* networkIdentifier, const floa
                     istoolongsize = true;
                 }
                 else {
-                    sendCommand("/tellraw @a { \"rawtext\": [{ \"text\": \"Detected spammer. " + author + " (size)\"}]");
+                    sendCommand("/tellraw @a { \"rawtext\": [{ \"text\": \"Detected spammer. " + author + " (size)\"}]}");
                     istoolongsize = false;
                 }
                 return;
