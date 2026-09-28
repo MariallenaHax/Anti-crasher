@@ -92,7 +92,7 @@ void kickPlayer(std::string author, std::string type) {
 HOOK_DEFINE_TRAMPOLINE(CommandP) {
 static void Callback(const float* a1, const float* networkIdentifier, const float* netEventCallback, const std::shared_ptr<Packet>& packet) {
         auto command = getCommandMessage(packet.get());
-        if (command.find("/me ") != std::string::npos || command.find("/mE ") != std::string::npos || command.find("/Me ") != std::string::npos || command.find("/ME ") != std::string::npos || command.find("me ") != std::string::npos || command.find("mE ") != std::string::npos || command.find("Me ") != std::string::npos || command.find("ME ") != std::string::npos)
+        if (command.find("/me ") == 0 || command.find("/mE ") == 0 || command.find("/Me ") == 0 || command.find("/ME ") == 0 || command.find("me ") == 0 || command.find("mE ") == 0 || command.find("Me ") == 0 || command.find("ME ") == 0)
         {
             return;
         }
