@@ -174,7 +174,6 @@ bool aaa2 = true;
 ImDrawData* ImguiCalc() {
 	ImGuiIO& io = ImGui::GetIO();
 	io.DeltaTime = 1 / 60.0f;
-	ImGui::NewFrame();
 	static bool aaa = false;
 	if (Address::getClientInstance() && (uintptr_t)Address::getLocalPlayer())
 	{
@@ -233,7 +232,6 @@ ImDrawData* ImguiCalc() {
 	}
 	else
 		aaa = false;
-	ImGui::Render();
 	return ImGui::GetDrawData();
 }
 
