@@ -486,9 +486,6 @@ bool initializeImGui() {
         uintptr_t mallocFn;
         uintptr_t freeFn;
 
-        R_ABORT_UNLESS(nn::ro::LookupSymbol(&mallocFn, "malloc"));
-        R_ABORT_UNLESS(nn::ro::LookupSymbol(&freeFn, "free"));
-
         Malloc = reinterpret_cast<void *(*)(size_t)>(mallocFn);
         Free = reinterpret_cast<void (*)(void*)>(freeFn);
 
