@@ -106,7 +106,7 @@ void TextPacketDispatcherDetour(const float* a1, const float* networkIdentifier,
                 return;
             }
 
-            else if (ContainsIgnoreCase(pkt->message, "Ens76385:必須侵入QQ群:908840510") || ContainsIgnoreCase(pkt->message, "LUMINE PROXY TOP!")) {
+            else if (ContainsIgnoreCase(pkt->message, "Ens76385:必須侵入QQ群:908840510") || ContainsIgnoreCase(pkt->message, "LUMINE PROXY ON TOP")) {
                 kickPlayer(pkt->author, "external");
 
                 if (isluminespamming) {
