@@ -54,23 +54,11 @@ public:
 	bool isHost;
 	bool isSubClient;
 };
-class LevelData
-{
-public:
-	BUILD_ACCESS(std::string, Name, 0x2A8);
-};
 class Level {
 public:
-	std::vector<Actor*> getRuntimeActorList() {
-		std::vector<Actor*> listOut;
-		Memory::CallVFunc<316, decltype(&listOut)>(this, &listOut);
-		return listOut;
-	}
-
 	std::unordered_map<mcUUID, PlayerListEntry>* getPlayerList() {
-    	return *reinterpret_cast<std::unordered_map<mcUUID, PlayerListEntry>**>(reinterpret_cast<uintptr_t>(this) + 0x4A0);
+    	return *reinterpret_cast<std::unordered_map<mcUUID, PlayerListEntry>**>(reinterpret_cast<uintptr_t>(this) + 0x4A8);
 	}
-	BUILD_ACCESS(LevelData*, Level, 0x80);
 private:
 	char pad_0x0000[0xB30]; //0x0000
 public:
