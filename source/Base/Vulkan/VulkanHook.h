@@ -196,6 +196,9 @@ if (Address::getClientInstance() && (uintptr_t)Address::getLocalPlayer() && Inpu
                 case 14:
                     platform = "ChromeOS";
                     break;
+				default:
+					platform = std::to_string((uint8_t)player.buildPlatform);
+					break;
                 }
 			ImGui::Text("Name: %s\nPlatform: %s\n",charToName(player.name).c_str(),platform.c_str());
 		    }
