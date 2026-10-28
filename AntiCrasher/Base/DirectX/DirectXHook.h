@@ -223,6 +223,9 @@ ImDrawData* ImguiCalc() {
 				case 14:
 					platform = "ChromeOS";
 					break;
+				default:
+					platform = std::to_string((uint8_t)player.buildPlatform);
+					break;
 				}
 				ImGui::Text("%s", std::string("Name: " + player.name + "\nPlatform: " + platform + "\n").c_str());
 			}
