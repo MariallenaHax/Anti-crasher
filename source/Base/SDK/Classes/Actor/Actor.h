@@ -101,17 +101,7 @@ enum ArmorSlot {
 	Boots = 3
 };
 
-// Actor VTable
-class Actor { // 1.21.2
+class Actor {
 public:
-
-
-public:
-	// Level Actor::getLevel(void)
-	BUILD_ACCESS(class Level*, Level, 0x1D0);
-	BUILD_ACCESS(StateVectorComponent*, StateVector, 0x210);
-	// AABBShapeComponent Actor::getAABB(void) or StateVector + 8
-	BUILD_ACCESS(AABBShapeComponent*, AABBShape, 0x218);
-	// MovementInterpolatorComponent Actor::getRotation(void) or StateVector + 16
-	BUILD_ACCESS(MovementInterpolatorComponent*, MovementInterpolator, 0x220);
+	BUILD_ACCESS(class Level*, Level, 0x1F8);
 };
