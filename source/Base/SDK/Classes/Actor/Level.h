@@ -25,7 +25,8 @@ public:
 	char pad1[0x09];
     char name[0x18]; 
 	char XUID[0x18];
-	char platformOnlineId[0x17];
+	char platformOnlineId[0x18];
+	char what[0x17];
     BuildPlatform buildPlatform;
     char pad2[0x22];
     bool isTeacher;
