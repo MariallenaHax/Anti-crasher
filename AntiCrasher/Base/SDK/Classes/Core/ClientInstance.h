@@ -23,11 +23,11 @@ public:
 	// Use CallVFunc to call the VTables by there index.
 
 	Player* getLocalPlayer() {
-		return Memory::CallVFunc<31, Player*>(this); 
+		return Memory::CallVFunc<30, Player*>(this); 
 	}
 
 	void playUI(std::string a1, float a2, float a3) {
-		Memory::CallVFunc<0xBB, void, std::string, float, float>(this, a1, a2, a3);
+		Memory::CallVFunc<0xBA, void, std::string, float, float>(this, a1, a2, a3);
 	}
 
 	Vector2<float> getFov() {
