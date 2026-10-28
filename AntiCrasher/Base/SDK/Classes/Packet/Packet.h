@@ -58,7 +58,7 @@ public:
 		static void* Address;
 
 		if (Address == nullptr) {
-			Address = Memory::findSig("56 48 83 EC 20 48 89 CE 81 FA 61 01 00 00 77 12 89 D0 48 8D 0D ? ? ? ? 48 63 04 81 48 01 C8 FF E0 0F 57 C0 0F 11 06 48 89 F0 48 83 C4 20");
+			Address = Memory::findSig("56 48 83 EC ? 48 89 CE 81 FA");
 		}
 
 		auto pFunction = reinterpret_cast<std::shared_ptr<Packet>(__fastcall*)(int)>(Address);
