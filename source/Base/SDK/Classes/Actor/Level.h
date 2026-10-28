@@ -1,27 +1,5 @@
 #pragma once
 
-class HitResult
-{
-	//private:
-		//char pad_0x0000[0x1C]; //0x0000
-public:
-	Vector3<float> Origin;
-	Vector3<float> RelativeRayEnd;
-	int HitType;
-	int BlockFace;
-	Vector3<int> IBlockPos;
-	Vector3<float> AbsoluteHitPos;
-
-	void* entity; //0x0038 // WeakEntityRef
-	bool isLiquid; //0x004C
-	char pad_004D[3]; //0x004D
-	int32_t liquidFace; //0x0050
-	Vector3<int> liquidBlockPos; //0x0054
-	Vector3<float> liquidPos; //0x0060
-	bool indirectHit; //0x006C
-	char pad_006D[3]; //0x006D
-}; //Size: 0x0070
-
 enum class BuildPlatform : int {
     Google = 1,
     IOS = 2,
