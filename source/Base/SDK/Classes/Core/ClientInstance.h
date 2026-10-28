@@ -21,10 +21,10 @@ public:
 class ClientInstance {
 public:
 	void playUI(std::string a1, float a2, float a3) {
-		Memory::CallVFunc<0xBB, void, std::string, float, float>(this, a1, a2, a3);
+		Memory::CallVFunc<0xBA, void, std::string, float, float>(this, a1, a2, a3);
 	}
 	Player* getLocalPlayer() {
-		return Memory::CallVFunc<32, Player*>(this); 
+		return Memory::CallVFunc<31, Player*>(this); 
 	}
 
 	Vector2<float> getFov() {
