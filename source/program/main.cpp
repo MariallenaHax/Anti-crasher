@@ -107,7 +107,7 @@ bool aaa = false;
 extern "C" void exl_main(void* x0, void* x1) {
     exl::hook::Initialize();
 
-    /*uintptr_t address1 = Memory::findSig("FF 43 06 D1 FD 7B 13 A9 FC 6F 14 A9 FA 67 15 A9 F8 5F 16 A9 F6 57 17 A9 F4 4F 18 A9 FD C3 04 91 E2 07");
+    /*uintptr_t address1 = Memory::findSig("FF 43 06 D1 FD 7B 13 A9 FC ? ? ? FA 67 15 A9 F8 5F 16 A9 F6 57 17 A9 F4 4F 18 A9 FD C3 04 91 ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? 40 ? ? ? 00 ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? 40 F9 00 01 3f d6 e0 23 00 f9 0a 00 00 14");
         if(address1)
             ForceCloseOreUI::InstallAtPtr(address1);          
         
