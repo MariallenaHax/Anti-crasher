@@ -16,7 +16,7 @@ class ActorHooks : public FuncHook {
 public:
 	bool Initialize() override
 	{
-		uintptr_t address4 = Memory::findSig("FD 7B BA A9 FC 0B 00 F9 FD 03 00 91 FA 67 02 A9 F8 5F 03 A9 F6 57 04 A9 F4 4F 05 A9 FF C3 0E D1 ? 52 08 F0 ? 03 ? ? 08 ? ? F9");
+		uintptr_t address4 = Memory::findSig("E8 ? ? FC ? ? ? A9 ? ? 00 91 ? ? 02 A9 ? ? 03 A9 ? ? 04 A9 ? ? 05 A9 ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? ? 08 ? 40 F9 A8 83 1E F8");
 			if(address4)
 			{
 				Insta::InstallAtPtr(address4);
