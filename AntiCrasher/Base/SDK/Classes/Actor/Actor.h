@@ -105,55 +105,6 @@ enum ArmorSlot {
 // Actor VTable
 class Actor { // 1.21.2
 public:
-	template <typename T>
-	T* getComponent() {
-		return const_cast<T*>(getEntityContext()->getRegistry().try_get<T>(getEntityContext()->mEntity));
-	}
-
-	template <typename T>
-	bool hasComponent() {
-		return getEntityContext()->getRegistry().all_of<T>(getEntityContext()->mEntity);
-	}
-
-	template <typename T>
-	void getOrEmplaceComponent() {
-		return getEntityContext()->getRegistry().get_or_emplace<T>(getEntityContext()->mEntity);
-	}
-
-	MoveInputComponent* getMoveInputHandler() {
-		return getComponent<MoveInputComponent>();
-	}
-
-	bool isPlayer() {
-		return hasComponent<FlagComponent<PlayerComponentFlag>>();
-	}
-
-	bool isLocalPlayer() {
-		return hasComponent<FlagComponent<LocalPlayerComponentFlag>>();
-	}
-
-	bool isAlive()
-	{
-		return !hasComponent<IsDeadFlagComponent>();
-	}
-
-	bool isOnGround() {
-		return hasComponent<OnGroundFlagComponent>();
-	}
-
-	EntityContext* getEntityContext()
-	{
-		uintptr_t address = reinterpret_cast<uintptr_t>(this);
-		return reinterpret_cast<EntityContext*>((uintptr_t)this + 0x8);
-	}
-
-
-public:
 	// Level Actor::getLevel(void)
-	BUILD_ACCESS(class Level*, Level, 0x1D8);
-	BUILD_ACCESS(StateVectorComponent*, StateVector, 0x218);
-	// AABBShapeComponent Actor::getAABB(void) or StateVector + 8
-	BUILD_ACCESS(AABBShapeComponent*, AABBShape, 0x220);
-	// MovementInterpolatorComponent Actor::getRotation(void) or StateVector + 16
-	BUILD_ACCESS(MovementInterpolatorComponent*, MovementInterpolator, 0x228);
+	BUILD_ACCESS(class Level*, Level, 0x200);
 };
