@@ -1,6 +1,6 @@
 #pragma once
 HOOK_DEFINE_TRAMPOLINE(Insta) {
-	static int64_t Callback(ClientInstance* _this, bool a) {
+	static int64_t Callback(ClientInstance* _this, bool a, bool b) {
 	if (Address::getClientInstance() && Address::getClientInstance()->getLoopbackPacketSender())
 		{
 			if(!aaab)
@@ -9,7 +9,7 @@ HOOK_DEFINE_TRAMPOLINE(Insta) {
 			}
 		}
         Address::Core::ClientInstance2 = _this;
-        return Orig(_this, a);
+        return Orig(_this, a, b);
     }
 };
 class ActorHooks : public FuncHook {
