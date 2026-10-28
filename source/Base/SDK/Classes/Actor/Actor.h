@@ -103,5 +103,5 @@ enum ArmorSlot {
 
 class Actor {
 public:
-	BUILD_ACCESS(class Level*, Level, 0x1F8);
+	BUILD_ACCESS(class Level*, Level, 0x1F0);
 };
